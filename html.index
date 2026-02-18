@@ -1,2 +1,22 @@
-<h1>Hello Web Development!</h1>
-<h2>This is my webpage!</h2>
+<link rel="stylesheet" href="style.css">
+<header>
+  <h1>my baking website</h1>
+</header>
+
+<nav>
+  <a href="#">home</a>
+  <a href="#">recipes</a>
+  <a href="#">about</a>
+</nav>
+
+<main>
+  <div class="recipe">
+    <h2>chocolate cake</h2>
+    <p>soft, rich, and easy to make</p>
+    <button>view recipe</button>
+  </div>
+</main>
+
+<footer>
+  <p>made with love 🍰</p>
+</footer>

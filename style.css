@@ -1,0 +1,92 @@
+/* reset some default browser stuff */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* whole page styling */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff7f0; /* soft bakery vibe */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* header at the top */
+header {
+  background-color: #f4a261; /* warm baking color */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* navigation bar */
+nav {
+  background-color: #e76f51;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* main content area */
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* section titles */
+h2 {
+  color: #e76f51;
+  margin-bottom: 10px;
+}
+
+/* paragraphs */
+p {
+  margin-bottom: 15px;
+}
+
+/* recipe cards (optional but cute) */
+.recipe {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fffdfb;
+}
+
+/* buttons */
+button {
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e76f51;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #f4a261;
+  color: white;
+  margin-top: 40px;
+}
