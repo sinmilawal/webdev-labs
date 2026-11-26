@@ -70,9 +70,9 @@
         <p class="text-uppercase text-muted fw-bold section-kicker">Selected work</p>
         <h2 class="display-5 fw-bold">Projects</h2>
         <p class="lead">
-            A selection of my programming coursework and creative work.
-            Explore interactive demonstrations, technical explanations
-            and source files.
+            A selection of my programming coursework and personal projects.
+            These projects demonstrate my experience with programming,
+            problem-solving, data structures and creative development.
         </p>
     </section>
 
@@ -81,13 +81,14 @@
 
         <div class="row g-4">
 
+            <!-- Emergency Dispatch System -->
             <div class="col-lg-6">
                 <article class="card project-card">
                     <div class="card-body p-4">
 
                         <div class="mb-3">
                             <span class="project-tag">Java</span>
-                            <span class="project-tag">Queues</span>
+                            <span class="project-tag">Queues and Deques</span>
                             <span class="project-tag">Sets</span>
                             <span class="project-tag">File Handling</span>
                         </div>
@@ -95,15 +96,28 @@
                         <h4 class="h5">Emergency Dispatch System</h4>
 
                         <p>
-                            A Java command-line application for recording
-                            and managing emergency incidents. It uses
-                            queues to prioritise incidents, sets to track
-                            unique incident types, searching and file handling.
+                            A Java command-line application designed to
+                            record and manage emergency incidents. The
+                            system prioritises incidents using queue and
+                            deque structures, allowing high-priority
+                            incidents to be handled first.
+                        </p>
+
+                        <p>
+                            I implemented incident management, searching
+                            by incident type and district, unique incident
+                            tracking, set-based trend analysis, file
+                            saving and loading, and input validation.
                         </p>
 
                         <p class="project-note">
-                            Includes a separate browser-based demonstration
-                            inspired by the original Java application.
+                            Developing this project strengthened my
+                            understanding of data structures and file
+                            handling. A challenge was managing incident
+                            priorities and implementing the different
+                            data operations reliably. I also developed
+                            and used a test plan to identify and correct
+                            issues.
                         </p>
 
                         <div class="project-actions">
@@ -112,7 +126,7 @@
                             </a>
 
                             <a href="https://github.com/sinmilawal/webdev-labs/tree/main/project-files/java-dispatch" class="btn btn-outline-secondary">
-                                View Source Files
+                                View Java Source
                             </a>
                         </div>
 
@@ -120,6 +134,7 @@
                 </article>
             </div>
 
+            <!-- C Hash Table -->
             <div class="col-lg-6">
                 <article class="card project-card">
                     <div class="card-body p-4">
@@ -134,26 +149,130 @@
                         <h4 class="h5">Hash Table Login System</h4>
 
                         <p>
-                            A C implementation of a user lookup system
-                            using hash tables and chained hashing.
-                            Features include user registration, lookup,
-                            password validation and memory management.
+                            A C-based user login and registration system
+                            using a hash table with linked-list chaining
+                            to manage collisions. The hash function
+                            distributes user IDs across eleven buckets.
+                        </p>
+
+                        <p>
+                            I implemented hash table initialisation,
+                            user lookup, registration and updating,
+                            password validation, loading user records
+                            from a file and freeing allocated memory.
+                        </p>
+
+                        <p class="project-note">
+                            This project developed my understanding of
+                            pointers, linked lists, hashing and dynamic
+                            memory management. I also practised debugging
+                            and input validation while working with C.
                         </p>
 
                         <p><strong>Assessment result: 99/100 (A1)</strong></p>
 
-                        <p class="project-note">
-                            Includes an interactive visualisation of
-                            hashing and collision handling.
-                        </p>
-
                         <div class="project-actions">
                             <a href="project-files/hash-table-demo.html" class="btn btn-primary">
-                                Explore Hash Table
+                                Explore Hash Table Demo
                             </a>
 
                             <a href="https://github.com/sinmilawal/webdev-labs/tree/main/project-files/c-hash-table" class="btn btn-outline-secondary">
-                                View Source Files
+                                View C Source
+                            </a>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+
+            <!-- Project Nova -->
+            <div class="col-lg-6">
+                <article class="card project-card">
+                    <div class="card-body p-4">
+
+                        <div class="mb-3">
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">Game Development</span>
+                            <span class="project-tag">Object-Oriented Programming</span>
+                            <span class="project-tag">File Handling</span>
+                        </div>
+
+                        <h4 class="h5">Project Nova – Interactive Puzzle Game</h4>
+
+                        <p>
+                            A two-player, turn-based Java game built
+                            around a 16×16 grid. Players explore the
+                            board to discover hidden creatures while
+                            encountering traps and power-ups.
+                        </p>
+
+                        <p>
+                            I developed the game logic, board system,
+                            creature database, player management,
+                            scoring, health system and save/load
+                            functionality. The game also includes
+                            different ways to sort the creature database.
+                        </p>
+
+                        <p class="project-note">
+                            This project helped me develop skills in
+                            object-oriented programming, game logic,
+                            class organisation and file handling.
+                            One challenge was managing interactions
+                            between the board, players and game state.
+                        </p>
+
+                        <p class="project-note">
+                            The final version uses a text-based
+                            interface after I found that completing
+                            the graphical interface within the available
+                            time was too complex.
+                        </p>
+
+                    </div>
+                </article>
+            </div>
+
+            <!-- Portfolio Website -->
+            <div class="col-lg-6">
+                <article class="card project-card">
+                    <div class="card-body p-4">
+
+                        <div class="mb-3">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">Bootstrap</span>
+                            <span class="project-tag">GitHub Pages</span>
+                        </div>
+
+                        <h4 class="h5">Personal Portfolio Website</h4>
+
+                        <p>
+                            My personal multi-page portfolio website,
+                            created to present my technical projects,
+                            education, experience and professional
+                            interests.
+                        </p>
+
+                        <p>
+                            I designed and organised the website using
+                            HTML and CSS, incorporated Bootstrap
+                            components and published it using GitHub Pages.
+                        </p>
+
+                        <p class="project-note">
+                            Building the website has developed my
+                            understanding of web page structure,
+                            navigation, responsive design and version
+                            control.
+                        </p>
+
+                        <div class="project-actions">
+                            <a href="index.html" class="btn btn-outline-secondary">
+                                View Website
+                            </a>
+                            <a href="https://github.com/sinmilawal/webdev-labs" class="btn btn-outline-secondary">
+                                View GitHub Repository
                             </a>
                         </div>
 
@@ -165,29 +284,9 @@
     </section>
 
     <section class="mb-5">
-        <h3 class="h4 mb-4">Other Projects & Creative Work</h3>
+        <h3 class="h4 mb-4">Additional Coursework & Interests</h3>
 
         <div class="row g-4">
-
-            <div class="col-md-6">
-                <article class="card project-card">
-                    <div class="card-body p-4">
-                        <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">Game Development</span>
-
-                        <h4 class="h5 mt-2">Interactive Puzzle Game</h4>
-
-                        <p>
-                            A browser-based puzzle game created as a
-                            personal coding project.
-                        </p>
-
-                        <p class="project-note">
-                            Live game link to be added.
-                        </p>
-                    </div>
-                </article>
-            </div>
 
             <div class="col-md-6">
                 <article class="card project-card">
@@ -198,37 +297,15 @@
                         <h4 class="h5 mt-2">Shell Scripting Coursework</h4>
 
                         <p>
-                            Programming coursework completed as part
-                            of CS11005 Shell Scripting.
+                            Coursework completed as part of CS11005
+                            Shell Scripting, developing my understanding
+                            of command-line tools and scripting.
                         </p>
 
                         <p class="project-note">
-                            Source files to be added.
+                            Further examples and source files can be
+                            added as the coursework is developed.
                         </p>
-                    </div>
-                </article>
-            </div>
-
-            <div class="col-md-6">
-                <article class="card project-card">
-                    <div class="card-body p-4">
-                        <span class="project-tag">HTML</span>
-                        <span class="project-tag">CSS</span>
-                        <span class="project-tag">Bootstrap</span>
-
-                        <h4 class="h5 mt-2">Portfolio Website</h4>
-
-                        <p>
-                            My personal portfolio website, developed
-                            to showcase my technical skills, projects
-                            and creative interests.
-                        </p>
-
-                        <div class="project-actions">
-                            <a href="index.html" class="btn btn-outline-secondary">
-                                View Website
-                            </a>
-                        </div>
                     </div>
                 </article>
             </div>
@@ -243,18 +320,72 @@
                         <h4 class="h5 mt-2">Digital Illustration & 3D Modelling</h4>
 
                         <p>
-                            Creative work combining digital illustration,
-                            animation and 3D modelling.
+                            An area of personal creative interest
+                            involving digital illustration, 3D modelling
+                            and exploring creative software.
                         </p>
 
                         <p class="project-note">
-                            Artwork gallery to be added.
+                            This reflects my interest in combining
+                            technical problem-solving with creativity.
                         </p>
                     </div>
                 </article>
             </div>
 
         </div>
+    </section>
+
+    <!-- Technical and transferable skills -->
+    <section class="mb-5">
+        <h3 class="h4 mb-4">Technical & Transferable Skills</h3>
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h4 class="h5">Technical Skills</h4>
+                        <ul>
+                            <li>Programming: Java, C and JavaScript</li>
+                            <li>Web development: HTML and CSS</li>
+                            <li>Data structures: queues, deques, sets, hash tables and linked lists</li>
+                            <li>File handling and input validation</li>
+                            <li>Debugging and software testing</li>
+                            <li>Git, GitHub and Visual Studio Code</li>
+                            <li>Blender and digital creative tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h4 class="h5">Transferable Skills</h4>
+                        <ul>
+                            <li><strong>Communication:</strong> Developed through sales work and customer-facing roles.</li>
+                            <li><strong>Teamwork:</strong> Working collaboratively in employment and volunteering.</li>
+                            <li><strong>Leadership:</strong> Experience as a First Year Class Representative.</li>
+                            <li><strong>Problem-solving:</strong> Identifying and resolving issues during programming projects.</li>
+                            <li><strong>Organisation:</strong> Managing coursework, responsibilities and deadlines.</li>
+                            <li><strong>Adaptability:</strong> Learning new technologies and responding to changing situations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h3 class="h4 mb-3">Professional Profiles</h3>
+        <p>
+            Explore my work and code through my GitHub profile.
+        </p>
+        <a href="https://github.com/sinmilawal" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary">
+            <i class="fa-brands fa-github"></i> Visit my GitHub
+        </a>
     </section>
 
 </main>
