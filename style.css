@@ -1,94 +1,236 @@
-/* ===== Global Styling ===== */
+
+/* ==============================
+   GENERAL STYLES
+============================== */
+
+:root {
+    --background: #111512;
+    --surface: #1b211d;
+    --surface-hover: #242d26;
+    --text: #f2f5f0;
+    --muted: #a5afa6;
+    --accent: #b7ed75;
+    --border: #303a32;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #F5E3E0;
-    color: #3A3238;
-    line-height: 1.7;
     margin: 0;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.7;
 }
 
-/* ===== Header ===== */
-
-header {
-    background-color: #6E4555 !important;
-}
-
-header h1 {
+h1, h2, h3, h4 {
+    color: var(--text);
     font-weight: 700;
+}
+
+p {
+    color: var(--muted);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+a:hover {
+    color: white;
+}
+
+/* ==============================
+   HEADER AND NAVIGATION
+============================== */
+
+.site-header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.site-header h1 {
+    font-size: 1.5rem;
     letter-spacing: 1px;
 }
 
-/* Nav layout + styling */
-nav {
-    margin-top: 10px;
+.site-header nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    align-items: center;
+    gap: 24px;
 }
 
-nav a {
-    color: #F5E3E0 !important;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s ease;
-    font-size: 16px;
+.site-header nav a {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-nav a:hover {
-    color: #E8B4BC !important;
+.site-header nav a:hover {
+    color: var(--accent);
 }
 
-nav i {
-    margin-right: 6px;
+.site-header nav i {
+    margin-right: 7px;
+    color: var(--accent);
 }
 
-/* ===== Main Content ===== */
+/* ==============================
+   MAIN CONTENT
+============================== */
 
 main {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.08);
+    min-height: 70vh;
 }
 
-/* Section headings */
-h2 {
-    color: #6E4555;
-    font-weight: 600;
-    margin-bottom: 20px;
+main section {
+    margin-bottom: 3rem;
 }
 
-/* ===== Portfolio Cards ===== */
+main h2 {
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.display-4 {
+    color: var(--accent);
+    line-height: 1.15;
+}
+
+.text-muted {
+    color: var(--muted) !important;
+}
+
+.text-uppercase {
+    letter-spacing: 2px;
+}
+
+/* ==============================
+   PROJECT AND CONTENT CARDS
+============================== */
 
 .card {
-    border: none;
-    border-radius: 12px;
-    background-color: #F5E3E0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card h3 {
-    color: #6E4555;
-    font-weight: 600;
+    height: 100%;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: var(--text);
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+    border-color: var(--accent);
 }
 
-/* ===== Footer ===== */
-
-footer {
-    background-color: #3A3238;
-    color: #F5E3E0;
-    font-size: 14px;
+.card-body {
+    padding: 1.5rem;
 }
 
-/* ===== Small Responsiveness Tweaks ===== */
-@media (min-width: 768px) {
-    nav { justify-content: flex-end; }
+.card-title {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--muted);
+}
+
+.card i {
+    color: var(--accent);
+    font-size: 1.7rem;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.btn {
+    border-radius: 30px;
+    padding: 11px 23px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #111512;
+}
+
+.btn-primary:hover {
+    background-color: #d0f5a5;
+    border-color: #d0f5a5;
+    color: #111512;
+}
+
+.btn-outline-secondary {
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ==============================
+   LISTS
+============================== */
+
+ul {
+    padding-left: 1.3rem;
+    color: var(--muted);
+}
+
+li {
+    margin-bottom: 0.6rem;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 768px) {
+
+    .site-header nav {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .site-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    main section {
+        margin-bottom: 2rem;
+    }
 }
