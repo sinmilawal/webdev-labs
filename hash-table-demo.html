@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hash Table Login System | Sinmi Lawal</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+    background: #101316;
+    color: #edf0f2;
+    font-family: 'Segoe UI', sans-serif;
+}
+.container { max-width: 1000px; }
+.panel {
+    background: #1a2025;
+    border: 1px solid #343e45;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 22px 0;
+}
+.muted { color: #aeb8bf; }
+.form-control {
+    background: #101619;
+    color: white;
+    border-color: #46525b;
+}
+.form-control:focus {
+    background: #101619;
+    color: white;
+}
+.btn-success {
+    background: #8ccf69;
+    border-color: #8ccf69;
+    color: #101316;
+}
+.bucket {
+    background: #141a1e;
+    border: 1px solid #3a454d;
+    border-radius: 9px;
+    padding: 12px;
+    min-height: 75px;
+    margin-bottom: 9px;
+}
+.bucket-number {
+    color: #b9ef75;
+    font-weight: bold;
+}
+.user-node {
+    display: inline-block;
+    background: #26352b;
+    border: 1px solid #8ccf69;
+    border-radius: 7px;
+    padding: 8px 12px;
+    margin: 5px;
+}
+a { color: #b9ef75; }
+</style>
+</head>
+<body>
+<main class="container py-5">
+
+<a href="portfolio.html">← Back to projects</a>
+
+<h1 class="mt-4">C Hash Table Login System</h1>
+<p class="muted">
+An interactive JavaScript visualisation of my C programming assignment.
+It demonstrates the hash table concepts used in the original coursework;
+it does not execute the original C program.
+</p>
+
+<section class="panel">
+<h2 class="h4">Register or update a user</h2>
+<div class="row g-3">
+    <div class="col-md-4">
+        <label for="userId" class="form-label">User ID (1–2139)</label>
+        <input id="userId" type="number" min="1" max="2139"
+               class="form-control" placeholder="e.g. 123">
+    </div>
+    <div class="col-md-4">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" type="password"
+               class="form-control" placeholder="Enter a password">
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+        <button id="register" class="btn btn-success w-100">
+            Register user
+        </button>
+    </div>
+</div>
+<p id="registerMessage" class="muted mt-3 mb-0" aria-live="polite"></p>
+</section>
+
+<section class="panel">
+<h2 class="h4">Find a user</h2>
+<div class="row g-3">
+    <div class="col-md-8">
+        <input id="findId" type="number" class="form-control"
+               placeholder="Enter user ID">
+    </div>
+    <div class="col-md-4">
+        <button id="find" class="btn btn-info w-100">Search</button>
+    </div>
+</div>
+<p id="findMessage" class="muted mt-3 mb-0" aria-live="polite"></p>
+</section>
+
+<section class="panel">
+<h2 class="h4">Validate a password</h2>
+<div class="row g-3">
+    <div class="col-md-4">
+        <input id="loginId" type="number" class="form-control"
+               placeholder="User ID">
+    </div>
+    <div class="col-md-4">
+        <input id="loginPassword" type="password" class="form-control"
+               placeholder="Password">
+    </div>
+    <div class="col-md-4">
+        <button id="login" class="btn btn-success w-100">Log in</button>
+    </div>
+</div>
+<p id="loginMessage" class="muted mt-3 mb-0" aria-live="polite"></p>
+</section>
+
+<section class="panel">
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <h2 class="h4">Hash table visualisation</h2>
+    <button id="reset" class="btn btn-outline-light btn-sm">
+        Reset demonstration
+    </button>
+</div>
+<p class="muted">
+The table has 11 buckets. Each user ID is assigned to a bucket
+using the remainder after division by 11.
+</p>
+<p class="muted">Hash function: <strong>user ID % 11</strong></p>
+<div id="table"></div>
+</section>
+
+<section class="panel">
+<h2 class="h4">How collision handling works</h2>
+<p class="muted">
+When two user IDs produce the same bucket number, they are stored
+in the same bucket using a linked-list chain. This is called
+separate chaining.
+</p>
+<p class="muted mb-0">
+For example, IDs 12 and 23 both map to bucket 1 because
+12 % 11 = 1 and 23 % 11 = 1.
+</p>
+</section>
+
+</main>
+
+<script>
+const BUCKET_COUNT = 11;
+const users = Array.from({ length: BUCKET_COUNT }, () => []);
+
+const get = id => document.getElementById(id);
+
+function getBucket(userId) {
+    return userId % BUCKET_COUNT;
+}
+
+function validId(value) {
+    const id = Number(value);
+    return Number.isInteger(id) && id >= 1 && id <= 2139;
+}
+
+function renderTable() {
+    get('table').innerHTML = users.map((bucket, index) => `
+        <div class="bucket">
+            <span class="bucket-number">Bucket ${index}</span>
+            <div>
+                ${bucket.length
+                    ? bucket.map(user => `
+                        <span class="user-node">
+                            ID ${user.id}
+                        </span>
+                    `).join(' → ')
+                    : '<span class="muted">Empty</span>'
+                }
+            </div>
+        </div>
+    `).join('');
+}
+
+get('register').onclick = () => {
+    const idValue = get('userId').value.trim();
+    const password = get('password').value;
+
+    if (!validId(idValue)) {
+        get('registerMessage').textContent =
+            'Please enter a valid user ID between 1 and 2139.';
+        return;
+    }
+
+    if (!password.trim()) {
+        get('registerMessage').textContent =
+            'Password cannot be empty.';
+        return;
+    }
+
+    const id = Number(idValue);
+    const bucketIndex = getBucket(id);
+    const bucket = users[bucketIndex];
+
+    const existing = bucket.find(user => user.id === id);
+
+    if (existing) {
+        existing.password = password;
+        get('registerMessage').textContent =
+            `User ${id} updated in bucket ${bucketIndex}.`;
+    } else {
+        bucket.push({ id, password });
+        get('registerMessage').textContent =
+            `User ${id} registered in bucket ${bucketIndex}.`;
+    }
+
+    get('userId').value = '';
+    get('password').value = '';
+    renderTable();
+};
+
+get('find').onclick = () => {
+    const value = get('findId').value.trim();
+
+    if (!validId(value)) {
+        get('findMessage').textContent = 'Enter a valid user ID.';
+        return;
+    }
+
+    const id = Number(value);
+    const bucketIndex = getBucket(id);
+    const user = users[bucketIndex].find(item => item.id === id);
+
+    get('findMessage').textContent = user
+        ? `User ${id} found in bucket ${bucketIndex}.`
+        : `User ${id} was not found.`;
+};
+
+get('login').onclick = () => {
+    const value = get('loginId').value.trim();
+    const password = get('loginPassword').value;
+
+    if (!validId(value)) {
+        get('loginMessage').textContent = 'Enter a valid user ID.';
+        return;
+    }
+
+    const id = Number(value);
+    const bucket = users[getBucket(id)];
+    const user = bucket.find(item => item.id === id);
+
+    if (user && user.password === password) {
+        get('loginMessage').textContent =
+            'Login successful. Password matches.';
+    } else {
+        get('loginMessage').textContent =
+            'Login failed. Check your user ID and password.';
+    }
+};
+
+get('reset').onclick = () => {
+    users.forEach(bucket => bucket.length = 0);
+    get('registerMessage').textContent = 'Demonstration reset.';
+    get('findMessage').textContent = '';
+    get('loginMessage').textContent = '';
+    renderTable();
+};
+
+renderTable();
+</script>
+</body>
+</html>
