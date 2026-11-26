@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Emergency Dispatch System | Sinmi Lawal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #101316;
+            color: #edf0f2;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 950px;
+        }
+
+        .panel {
+            background: #1a2025;
+            border: 1px solid #343e45;
+            border-radius: 14px;
+            padding: 22px;
+            margin: 22px 0;
+        }
+
+        .muted {
+            color: #aeb8bf;
+        }
+
+        .incident {
+            padding: 14px;
+            border: 1px solid #3a454d;
+            border-radius: 10px;
+            margin: 10px 0;
+            background: #141a1e;
+        }
+
+        .high {
+            border-left: 5px solid #ffb454;
+        }
+
+        .normal {
+            border-left: 5px solid #8ccf69;
+        }
+
+        .form-control, .form-select {
+            background: #101619;
+            color: white;
+            border-color: #46525b;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: #101619;
+            color: white;
+        }
+
+        .btn-success {
+            background: #8ccf69;
+            border-color: #8ccf69;
+            color: #101316;
+        }
+
+        a {
+            color: #b9ef75;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="container py-5">
+
+    <a href="portfolio.html">← Back to projects</a>
+
+    <h1 class="mt-4">Emergency Dispatch System</h1>
+
+    <p class="muted">
+        An interactive browser demonstration inspired by my Java coursework.
+        This is a separate JavaScript simulation, not the original Java program.
+    </p>
+
+    <section class="panel">
+        <h2 class="h4 mb-3">Add a new incident</h2>
+
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <label for="type" class="form-label">Incident type</label>
+                <input id="type" class="form-control"
+                       placeholder="e.g. Fire">
+            </div>
+
+            <div class="col-md-4">
+                <label for="district" class="form-label">District</label>
+                <input id="district" class="form-control"
+                       placeholder="e.g. Central">
+            </div>
+
+            <div class="col-md-2">
+                <label for="priority" class="form-label">Priority</label>
+                <select id="priority" class="form-select">
+                    <option value="0">Normal</option>
+                    <option value="1">High</option>
+                </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                <button id="add" class="btn btn-success w-100">
+                    Add
+                </button>
+            </div>
+
+        </div>
+
+        <p id="message" class="muted mt-3 mb-0" aria-live="polite"></p>
+    </section>
+
+    <section class="panel">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h2 class="h4">Incident queue</h2>
+
+            <div>
+                <button id="remove" class="btn btn-warning btn-sm">
+                    Remove next
+                </button>
+
+                <button id="clear" class="btn btn-outline-light btn-sm">
+                    Clear queue
+                </button>
+            </div>
+        </div>
+
+        <div id="queue" class="mt-3"></div>
+
+    </section>
+
+    <section class="panel">
+
+        <h2 class="h4">Search incidents</h2>
+
+        <div class="row g-2">
+
+            <div class="col-md-3">
+                <select id="searchField" class="form-select">
+                    <option value="type">Incident type</option>
+                    <option value="district">District</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <input id="searchText" class="form-control"
+                       placeholder="Enter search term">
+            </div>
+
+            <div class="col-md-3">
+                <button id="search" class="btn btn-info w-100">
+                    Search
+                </button>
+            </div>
+
+        </div>
+
+        <div id="searchResults" class="mt-3 muted"></div>
+
+    </section>
+
+    <section class="panel">
+        <h2 class="h4">Unique incident types</h2>
+        <div id="types" class="muted">No incidents yet.</div>
+    </section>
+
+    <section class="panel">
+        <h2 class="h4">Activity log</h2>
+        <ol id="log" class="muted mb-0"></ol>
+    </section>
+
+</main>
+
+<script>
+
+const queue = [];
+const log = [];
+
+let nextId = 1;
+
+const get = id => document.getElementById(id);
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[character]);
+}
+
+function render() {
+
+    get('queue').innerHTML = queue.length
+        ? queue.map((incident, index) => `
+            <div class="incident ${incident.priority ? 'high' : 'normal'}">
+                <strong>#${index + 1} — ${escapeHTML(incident.type)}</strong>
+                <br>
+                District: ${escapeHTML(incident.district)}
+                <span class="muted">
+                    | ${incident.priority ? 'High priority' : 'Normal priority'}
+                    | ID ${incident.id}
+                </span>
+            </div>
+        `).join('')
+        : '<p class="muted">The queue is empty.</p>';
+
+    const uniqueTypes = [...new Set(queue.map(item => item.type))];
+
+    get('types').textContent = uniqueTypes.length
+        ? uniqueTypes.join(' · ')
+        : 'No incidents yet.';
+
+    get('log').innerHTML = log
+        .map(entry => `<li>${escapeHTML(entry)}</li>`)
+        .join('');
+}
+
+get('add').onclick = () => {
+
+    const type = get('type').value.trim().toLowerCase();
+    const district = get('district').value.trim().toLowerCase();
+    const priority = Number(get('priority').value);
+
+    if (!type || !district) {
+        get('message').textContent =
+            'Please enter both an incident type and district.';
+        return;
+    }
+
+    const incident = {
+        id: nextId++,
+        type,
+        district,
+        priority
+    };
+
+    if (priority === 1) {
+        queue.unshift(incident);
+    } else {
+        queue.push(incident);
+    }
+
+    log.unshift(
+        `Added ${type} incident in ${district}.`
+    );
+
+    get('type').value = '';
+    get('district').value = '';
+
+    get('message').textContent = 'Incident successfully added.';
+
+    render();
+};
+
+get('remove').onclick = () => {
+
+    if (queue.length === 0) {
+        get('message').textContent = 'There are no incidents to remove.';
+        return;
+    }
+
+    const removed = queue.shift();
+
+    log.unshift(
+        `Removed ${removed.type} incident from ${removed.district}.`
+    );
+
+    get('message').textContent =
+        `Removed incident: ${removed.type}`;
+
+    render();
+};
+
+get('clear').onclick = () => {
+
+    queue.length = 0;
+
+    log.unshift('The demonstration queue was cleared.');
+
+    get('searchResults').textContent = '';
+    get('message').textContent = 'Queue cleared.';
+
+    render();
+};
+
+get('search').onclick = () => {
+
+    const field = get('searchField').value;
+    const query = get('searchText').value.trim().toLowerCase();
+
+    if (!query) {
+        get('searchResults').textContent = 'Enter a search term.';
+        return;
+    }
+
+    const results = queue.filter(
+        incident => incident[field] === query
+    );
+
+    get('searchResults').textContent = results.length
+        ? results.map(item =>
+            `${item.type} — ${item.district} (ID ${item.id})`
+          ).join(' | ')
+        : 'No matching incidents found.';
+};
+
+render();
+
+</script>
+
+</body>
+</html>
